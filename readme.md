@@ -1,4 +1,4 @@
-# Foobar
+# EC2 bastion server and a RDS
 
 This is an EC2 bastion server and a RDS instance setup for the Sainsburys data academy final project's teams.
 
