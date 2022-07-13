@@ -11,6 +11,10 @@ This is an EC2 bastion server and a RDS instance setup for the Sainsburys data a
 
 - Create an environment file `deploy/.sainsburys.env` and put your fresh `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` in it. (you can find these credential with command  `cat ~/.aws/credentials`)
 ```sh
+aws-azure-login --profile bootcamp-sandbox --mode=gui
+```
+
+```sh
 AWS_ACCESS_KEY_ID=<your-aws-access-key-id>
 AWS_SECRET_ACCESS_KEY=<your-aws-secret-access-key>
 AWS_SESSION_TOKEN=<your-aws-session-token>
@@ -39,9 +43,21 @@ make tf-plan
 make tf-apply
 ```
 
+## Check Connectivity
+
+- Connect to the bastion server:
+```sh
+aws ssm start-session --target [instance_id] --profile [name_of_profile] --region eu-west-1
+```
+- Make sure you can ping the rds database to see whether the network configuration is ok:
+
+```sh
+telnet <your-rds-db-endpoint> <your-db-port-number>
+```
+
 ## Usage
 
-- run:
+- run (it will do port-forwarding from your machine to the bastion server - keep this terminal open):
 ```sh
 aws ssm start-session \
     --target <ec2-instance-id> \
@@ -50,10 +66,7 @@ aws ssm start-session \
     --parameters '{"host":["<your-rds-db-endpoint>"],"portNumber":["<your-db-port-number>"], "localPortNumber":["<your-local-port-number>"]}'
     --region eu-west-1
 ```
-- Connect to the db:
-```sh
-psql -h localhost -p <your-local-port-number> -U <your-db-user-name> -W -d <your-db-name>
-```
+- Connect to the db using your preferred db tool, using `localhost` as the endpoint, `<your-local-port-number>` from the previous command as the db-port and your defined credentials in the Installation section.
 
 ## Destroy 
 
