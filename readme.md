@@ -9,7 +9,7 @@ This is an EC2 bastion server and a RDS instance setup for the Sainsburys data a
 
 ## Installation
 
-- Create an environment file `deploy/.sainsburys.env` and put your fresh `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` in it. (you can find these credential with command  `cat ~/.aws/credentials`)
+- Create an environment file `deploy/.sainsburys.env` and put your fresh `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` in it. (you can find these credentials with command  `cat ~/.aws/credentials`)
 ```sh
 aws-azure-login --profile bootcamp-sandbox --mode=gui
 ```
